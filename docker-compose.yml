@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  ssh-tunnel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ssh-tunnel
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    user: "root"
+    ports:
+      - "26:22"
+    volumes:
+      - ./vol/ssh:/home/sshonly/.ssh
+    command: ["/bin/sh"]
